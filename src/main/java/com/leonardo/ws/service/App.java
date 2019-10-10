@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.leonardo.ws;
+package com.leonardo.ws.service;
 
 import java.util.HashSet;
 import java.util.Set;
