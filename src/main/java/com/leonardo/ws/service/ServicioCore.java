@@ -30,6 +30,7 @@ public class ServicioCore {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Path("ubicaciones/")
     public List<Ubicacion> obtenerUbicaciones() {
         if (Constantes.SIMULADOR_UBICACIONES) {
             return dataSimulada();
@@ -40,12 +41,12 @@ public class ServicioCore {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("{fecha}")
-    public List<Alerta> obtenerAlertas(@PathParam("fecha") Date fecha) {
+    @Path("alertas/")
+    public List<Alerta> obtenerAlertas() {
         if (Constantes.SIMULADOR_ALERTAS) {
-            return alertaSimulada(fecha);
+            return alertaSimulada();
         } else {
-            return listarAlertas(fecha);
+            return listarAlertas();
         }
     }
 
@@ -86,7 +87,7 @@ public class ServicioCore {
         return null;
     }
 
-    private List<Alerta> alertaSimulada(Date fecha) {
+    private List<Alerta> alertaSimulada() {
         List<Alerta> alertas = new LinkedList<>();
         Date fechaActual = new Date();
         alertas.add(new Alerta("Ganado 3", new Date(fechaActual.getTime() + TimeUnit.DAYS.toMillis(1))));
@@ -99,7 +100,7 @@ public class ServicioCore {
         return alertas;
     }
 
-    private List<Alerta> listarAlertas(Date fecha) {
+    private List<Alerta> listarAlertas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

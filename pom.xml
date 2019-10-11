@@ -12,6 +12,7 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <wildfly.folder>C:\wildfly-12.0.0.Final\standalone\deployments</wildfly.folder>
     </properties>
     
     <dependencies>

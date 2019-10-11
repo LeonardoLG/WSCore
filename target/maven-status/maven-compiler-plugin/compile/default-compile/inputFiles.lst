@@ -1,3 +1,5 @@
-C:\Users\USUARIO\Documents\NetBeansProjects\WSCore\src\main\java\com\leonardo\ws\ServicioCore.java
-C:\Users\USUARIO\Documents\NetBeansProjects\WSCore\src\main\java\com\leonardo\ws\Ubicacion.java
-C:\Users\USUARIO\Documents\NetBeansProjects\WSCore\src\main\java\com\leonardo\ws\App.java
+C:\Users\USUARIO\Documents\NetBeansProjects\WSCore\src\main\java\com\leonardo\ws\dao\Ubicacion.java
+C:\Users\USUARIO\Documents\NetBeansProjects\WSCore\src\main\java\com\leonardo\ws\dao\Alerta.java
+C:\Users\USUARIO\Documents\NetBeansProjects\WSCore\src\main\java\com\leonardo\ws\service\App.java
+C:\Users\USUARIO\Documents\NetBeansProjects\WSCore\src\main\java\com\leonardo\ws\util\Constantes.java
+C:\Users\USUARIO\Documents\NetBeansProjects\WSCore\src\main\java\com\leonardo\ws\service\ServicioCore.java

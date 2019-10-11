@@ -1,3 +1,5 @@
-com\leonardo\ws\App.class
-com\leonardo\ws\ServicioCore.class
-com\leonardo\ws\Ubicacion.class
+com\leonardo\ws\service\ServicioCore.class
+com\leonardo\ws\dao\Ubicacion.class
+com\leonardo\ws\service\App.class
+com\leonardo\ws\dao\Alerta.class
+com\leonardo\ws\util\Constantes.class
