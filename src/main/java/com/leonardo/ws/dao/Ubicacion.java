@@ -14,6 +14,7 @@ public class Ubicacion {
     private double lat;
     private double lng;
     private int zIndex;
+    private int flagAlerta;
 
     public String getTitle() {
         return title;
@@ -47,11 +48,12 @@ public class Ubicacion {
         this.zIndex = zIndex;
     }
 
-    public Ubicacion(String title, double lat, double lng, int zIndex) {
+    public Ubicacion(String title, double lat, double lng, int zIndex, int flagAlerta) {
         this.title = title;
         this.lat = lat;
         this.lng = lng;
         this.zIndex = zIndex;
+        this.flagAlerta = flagAlerta;
     }
 
     @Override
