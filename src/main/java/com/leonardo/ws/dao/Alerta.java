@@ -14,9 +14,9 @@ import java.util.Date;
 public class Alerta {
 
     private String nombreGanado;
-    private Date fechaAlerta;
+    private String fechaAlerta;
 
-    public Alerta(String nombreGanado, Date fechaAlerta) {
+    public Alerta(String nombreGanado, String fechaAlerta) {
         this.nombreGanado = nombreGanado;
         this.fechaAlerta = fechaAlerta;
     }
@@ -29,17 +29,14 @@ public class Alerta {
         this.nombreGanado = nombreGanado;
     }
 
-    public Date getFechaAlerta() {
+    public String getFechaAlerta() {
         return fechaAlerta;
     }
 
-    public void setFechaAlerta(Date fechaAlerta) {
+    public void setFechaAlerta(String fechaAlerta) {
         this.fechaAlerta = fechaAlerta;
     }
 
-    @Override
-    public String toString() {
-        return "Alerta{" + "nombreGanado=" + nombreGanado + ", fechaAlerta=" + fechaAlerta + '}';
-    }
-
+    
+    
 }

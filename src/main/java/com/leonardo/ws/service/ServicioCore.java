@@ -6,17 +6,21 @@
 package com.leonardo.ws.service;
 
 import com.leonardo.ws.dao.Alerta;
+import com.leonardo.ws.dao.Mapa;
 import com.leonardo.ws.dao.Ubicacion;
 import com.leonardo.ws.util.Constantes;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -30,7 +34,18 @@ public class ServicioCore {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("ubicaciones/")
+    @Path("obtenerMapa/")
+    public Mapa obtenerMapa() {
+        if (Constantes.SIMULADOR_MAPA) {
+            return mapaSimulado();
+        } else {
+            return dataMapa();
+        }
+    }
+    
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("obtenerUbicaciones/")
     public List<Ubicacion> obtenerUbicaciones() {
         if (Constantes.SIMULADOR_UBICACIONES) {
             return dataSimulada();
@@ -40,25 +55,15 @@ public class ServicioCore {
     }
 
     @GET
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @PathParam(String nombreGanado)
-    @Path("alertas/")
-    public List<Alerta> obtenerAlertas() {
+    @Path("listarAlertas/")
+    public List<Alerta> obtenerListaAlertas(@QueryParam("fecha") String fecha) {
+        LOGGER.info("Fecha de Busqueda:" + fecha);
         if (Constantes.SIMULADOR_ALERTAS) {
-            return alertaSimulada();
+            return listaAlertasSimuladas(fecha);
         } else {
-            return alerta();
-        }
-    }
-
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    @Path("listaAlertas/")
-    public List<Alerta> obtenerListaAlertas() {
-        if (Constantes.SIMULADOR_ALERTAS) {
-            return listaAlertasSimuladas();
-        } else {
-            return listarAlertas();
+            return listarAlertas(fecha);
         }
     }
 
@@ -68,24 +73,24 @@ public class ServicioCore {
 
         switch (valorEntero) {
             case 0:
-                ubicaciones.add(new Ubicacion("Ganado 1", -7.173109, -78.476614, 4, generarAlerta("Ganado 1", -7.173109, -78.476614)));
-                ubicaciones.add(new Ubicacion("Ganado 2", -7.173161, -78.476727, 5, generarAlerta("Ganado 2", -7.173161, -78.476727)));
-                ubicaciones.add(new Ubicacion("Ganado 3", -7.172898, -78.476665, 2, generarAlerta("Ganado 3", -7.172898, -78.476665)));
-                ubicaciones.add(new Ubicacion("Ganado 4", -7.172637, -78.476550, 1, generarAlerta("Ganado 4", -7.172637, -78.476550)));
+                ubicaciones.add(new Ubicacion("Ganado 1", -7.173109, -78.476614, 4, existeAlerta("Ganado 1", -7.173109, -78.476614)));
+                ubicaciones.add(new Ubicacion("Ganado 2", -7.173161, -78.476727, 5, existeAlerta("Ganado 2", -7.173161, -78.476727)));
+                ubicaciones.add(new Ubicacion("Ganado 3", -7.172898, -78.476665, 2, existeAlerta("Ganado 3", -7.172898, -78.476665)));
+                ubicaciones.add(new Ubicacion("Ganado 4", -7.172637, -78.476550, 1, existeAlerta("Ganado 4", -7.172637, -78.476550)));
                 break;
 
             case 1:
-                ubicaciones.add(new Ubicacion("Ganado 1", -7.172680, -78.476612, 4, generarAlerta("Ganado 1", -7.172680, -78.476612)));
-                ubicaciones.add(new Ubicacion("Ganado 2", -7.172677, -78.476770, 5, generarAlerta("Ganado 2", -7.172677, -78.476770)));
-                ubicaciones.add(new Ubicacion("Ganado 3", -7.172587, -78.476975, 2, generarAlerta("Ganado 3", -7.172587, -78.476975)));
-                ubicaciones.add(new Ubicacion("Ganado 4", -7.172089, -78.477353, 1, generarAlerta("Ganado 4", -7.172089, -78.477353)));
+                ubicaciones.add(new Ubicacion("Ganado 1", -7.172680, -78.476612, 4, existeAlerta("Ganado 1", -7.172680, -78.476612)));
+                ubicaciones.add(new Ubicacion("Ganado 2", -7.172677, -78.476770, 5, existeAlerta("Ganado 2", -7.172677, -78.476770)));
+                ubicaciones.add(new Ubicacion("Ganado 3", -7.172587, -78.476975, 2, existeAlerta("Ganado 3", -7.172587, -78.476975)));
+                ubicaciones.add(new Ubicacion("Ganado 4", -7.172089, -78.477353, 1, existeAlerta("Ganado 4", -7.172089, -78.477353)));
                 break;
 
             case 2:
-                ubicaciones.add(new Ubicacion("Ganado 1", -7.172036, -78.477511, 4, generarAlerta("Ganado 1", -7.172036, -78.477511)));
-                ubicaciones.add(new Ubicacion("Ganado 2", -7.172898, -78.476665, 5, generarAlerta("Ganado 2", -7.172898, -78.476665)));
-                ubicaciones.add(new Ubicacion("Ganado 3", -7.173109, -78.476614, 2, generarAlerta("Ganado 3", -7.173109, -78.476614)));
-                ubicaciones.add(new Ubicacion("Ganado 4", -7.172587, -78.476975, 1, generarAlerta("Ganado 4", -7.172587, -78.476975)));
+                ubicaciones.add(new Ubicacion("Ganado 1", -7.172036, -78.477511, 4, existeAlerta("Ganado 1", -7.172036, -78.477511)));
+                ubicaciones.add(new Ubicacion("Ganado 2", -7.172898, -78.476665, 5, existeAlerta("Ganado 2", -7.172898, -78.476665)));
+                ubicaciones.add(new Ubicacion("Ganado 3", -7.173109, -78.476614, 2, existeAlerta("Ganado 3", -7.173109, -78.476614)));
+                ubicaciones.add(new Ubicacion("Ganado 4", -7.172587, -78.476975, 1, existeAlerta("Ganado 4", -7.172587, -78.476975)));
                 break;
 
         }
@@ -99,45 +104,60 @@ public class ServicioCore {
         return null;
     }
 
-    private List<Alerta> listaAlertasSimuladas() {
+    private List<Alerta> listaAlertasSimuladas(String fecha) {
         List<Alerta> alertas = new LinkedList<>();
-        Date fechaActual = new Date();
-        alertas.add(new Alerta("Ganado 3", new Date(fechaActual.getTime() + TimeUnit.DAYS.toMillis(1))));
-        alertas.add(new Alerta("Ganado 1", new Date(fechaActual.getTime() + TimeUnit.DAYS.toMillis(-1))));
-        alertas.add(new Alerta("Ganado 4", new Date(fechaActual.getTime() + TimeUnit.DAYS.toMillis(-2))));
-        alertas.add(new Alerta("Ganado 3", new Date(fechaActual.getTime() + TimeUnit.DAYS.toMillis(-3))));
+        alertas.add(new Alerta("Ganado 3", fecha + " 12:30:35 AM"));
+        alertas.add(new Alerta("Ganado 1", fecha + " 01:30:35 PM"));
+        alertas.add(new Alerta("Ganado 4", fecha + " 05:30:35 PM"));
+        alertas.add(new Alerta("Ganado 3", fecha + " 12:30:35 PM"));
 
         LOGGER.info("Data de Alertas Simuladas Exitosa");
-        LOGGER.info("Alertas " + alertas);
+        LOGGER.info("Alertas " + alertas.toString());
         return alertas;
     }
 
-    private List<Alerta> listarAlertas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private List<Alerta> listarAlertas(String fecha) {
+        return null;
     }
-    
+
     private List<Alerta> alertaSimulada() {
         return null;
     }
-    
+
     private List<Alerta> alerta() {
         return null;
     }
-    
-    private int generarAlerta(String nombreGanado, double posicionX, double posicionY) {
-        if (!isUbicacionValida(posicionX, posicionY)){
-            enviarAlerta(nombreGanado, posicionX, posicionY, new Date());
-            return 1;
+
+    private String existeAlerta(String nombreGanado, double posicionX, double posicionY) {
+        if (!esUbicacionValida(posicionX, posicionY)) {
+            return registrarAlerta(nombreGanado, posicionX, posicionY, new Date());
         }
-        return 0;
+        return null;
     }
-    
-    private Boolean isUbicacionValida(double posicionX, double posicionY){
+
+    private Boolean esUbicacionValida(double posicionX, double posicionY) {
         //calcular posiscion invalida        
         return true;
     }
-    
-    private void enviarAlerta(String nombreGanado, double posicionX, double posicionY, Date fecha){
-    //enviar mensaje correo    
+
+    private String registrarAlerta(String nombreGanado, double posicionX, double posicionY, Date fecha) {
+        //guardarAlerta();
+        //enviarAlerta();
+        //enviar mensaje correo
+        return mostrarFechaAlerta(fecha);
+    }
+
+    private String mostrarFechaAlerta(Date fechaActual) {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/y hh:mm:ss a");
+        return formatoFecha.format(fechaActual);
+    }
+
+    private Mapa mapaSimulado() {
+        LOGGER.info("Consumiendo Mapa");
+        return new Mapa(18, -7.171757, -78.478472);
+    }
+
+    private Mapa dataMapa() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

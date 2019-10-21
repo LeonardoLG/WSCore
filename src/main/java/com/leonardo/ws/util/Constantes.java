@@ -10,6 +10,7 @@ package com.leonardo.ws.util;
  * @author USUARIO
  */
 public class Constantes {
+    public static boolean SIMULADOR_MAPA = true;
     public static boolean SIMULADOR_UBICACIONES = true;
     public static boolean SIMULADOR_ALERTAS =  true;
 }

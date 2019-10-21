@@ -10,18 +10,26 @@ package com.leonardo.ws.dao;
  * @author lleon
  */
 public class Ubicacion {
-    private String title;
+    private String nombreGanado;
     private double lat;
     private double lng;
     private int zIndex;
-    private int flagAlerta;
+    private String fechaAlerta;
 
-    public String getTitle() {
-        return title;
+    public Ubicacion(String nombreGanado, double lat, double lng, int zIndex, String fechaAlerta) {
+        this.nombreGanado = nombreGanado;
+        this.lat = lat;
+        this.lng = lng;
+        this.zIndex = zIndex;
+        this.fechaAlerta = fechaAlerta;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getNombreGanado() {
+        return nombreGanado;
+    }
+
+    public void setNombreGanado(String nombreGanado) {
+        this.nombreGanado = nombreGanado;
     }
 
     public double getLat() {
@@ -48,17 +56,19 @@ public class Ubicacion {
         this.zIndex = zIndex;
     }
 
-    public Ubicacion(String title, double lat, double lng, int zIndex, int flagAlerta) {
-        this.title = title;
-        this.lat = lat;
-        this.lng = lng;
-        this.zIndex = zIndex;
-        this.flagAlerta = flagAlerta;
+    public String getFechaAlerta() {
+        return fechaAlerta;
+    }
+
+    public void setFechaAlerta(String fechaAlerta) {
+        this.fechaAlerta = fechaAlerta;
     }
 
     @Override
     public String toString() {
-        return "Ubicacion{" + "title=" + title + ", lat=" + lat + ", lng=" + lng + ", zIndex=" + zIndex + '}';
+        return "Ubicacion{" + "nombreGanado=" + nombreGanado + ", lat=" + lat + ", lng=" + lng + ", zIndex=" + zIndex + ", fechaAlerta=" + fechaAlerta + '}';
     }
     
+    
+
 }
