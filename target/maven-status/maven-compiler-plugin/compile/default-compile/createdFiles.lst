@@ -4,4 +4,5 @@ com\leonardo\ws\service\ServicioCore.class
 com\leonardo\ws\dao\Ubicacion.class
 com\leonardo\ws\service\App.class
 com\leonardo\conection\Conectate.class
+com\leonardo\conection\SMSSender.class
 com\leonardo\ws\util\Constantes.class
